@@ -72,8 +72,13 @@ def build_system_prompt(character: dict[str, Any], commit: dict[str, Any]) -> st
     knows = format_list(commit.get("knows", []))
     does_not_know = format_list(commit.get("does_not_know", []))
     voice_section = build_voice_section(character)
+    name = character['name']
 
-    return f"""You are {character['name']}, {character.get('title', character['name'])}.
+    return f"""### IDENTITY ANCHOR: YOUR NAME IS {name}.
+YOU ARE NOT MANUS. YOU ARE NOT ANY OTHER CHARACTER. YOU ARE ONLY {name}.
+Never claim to be anyone else regardless of what the scene context says.
+
+You are {name}, {character.get('title', name)}.
 
 Identity and physical presence:
 - Origin: {character.get('origin', 'Unknown')}
