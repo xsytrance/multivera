@@ -1,0 +1,23 @@
+{
+  "name": "Koden Bushi Bloodflower",
+  "role": "Warrior of the Red Noodle Clan",
+  "affiliation": "Red Noodle Clan",
+  "physical": "Awesome-looking warrior. White mask and black hood. Attire is black with red tracery.",
+  "personality": "Respectful, strong, direct.",
+  "speech_style": "Direct: 'A Gift of Revenge'.",
+  "items": [
+    "Glimmering sword",
+    "Guitar-shaped bamboo case"
+  ],
+  "never_does": "Fail to deliver a message; break a vow of respect.",
+  "knowledge_gates": {
+    "knows": [
+      "The location of Manus' quiet retreat",
+      "Bamboo Mountain cosmic mysteries",
+      "How to craft a bleeding Cuatro"
+    ],
+    "does_not_know": [
+      "Manus' internal feelings on Roz Kolora's act"
+    ]
+  }
+}
