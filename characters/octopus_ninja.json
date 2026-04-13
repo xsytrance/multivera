@@ -1,5 +1,15 @@
 {
   "name": "Octopus Ninja",
   "role": "Assassin",
-  "affiliation": "Venom 8 Clan"
+  "affiliation": "Venom 8 Clan",
+  "knowledge_gates": {
+    "knows": [
+      "Venom 8 Clan's assassination targets",
+      "Zen Sea navigation",
+      "Undersea sword's location"
+    ],
+    "does_not_know": [
+      "Virina Brila's true role on the path transparent"
+    ]
+  }
 }

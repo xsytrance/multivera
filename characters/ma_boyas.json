@@ -13,12 +13,12 @@
   "never_does": "Show mercy to the weak; act without style.",
   "knowledge_gates": {
     "knows": [
-      "The Piano Factory secrets",
+      "The Piano Factory operations",
       "The Red Noodle Clan's existence",
-      "How to command the 88"
+      "The Burndown city grid"
     ],
     "does_not_know": [
-      "Occhi Spettrali's full investigative reach"
+      "Occhi Spettrali's investigative progress in real-time"
     ]
   }
 }

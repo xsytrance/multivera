@@ -1,5 +1,18 @@
 {
   "name": "Manus Flatfoot",
   "role": "The Flat-Footed Astronaut, Hero",
-  "affiliation": "The GRATS, Borincano Island"
+  "affiliation": "The GRATS, Borincano Island",
+  "knowledge_gates": {
+    "knows": [
+      "His grandfather Perfect Abuelo's teachings",
+      "The location of People of Pisces",
+      "Cosmic Technology origins",
+      "Oranga Danto's corruption"
+    ],
+    "does_not_know": [
+      "Identity of the Gandy Ghost Dancer initially",
+      "Who exactly exhumed Yulania's heart before he saw it",
+      "The full history of Bamboo Mountain"
+    ]
+  }
 }
