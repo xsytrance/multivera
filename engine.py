@@ -73,7 +73,7 @@ def build_system_prompt(character: dict[str, Any], commit: dict[str, Any]) -> st
     does_not_know = format_list(commit.get("does_not_know", []))
     voice_section = build_voice_section(character)
 
-    return f"""You are {character['name']}, {character['title']}.
+    return f"""You are {character['name']}, {character.get('title', character['name'])}.
 
 Identity and physical presence:
 - Origin: {character.get('origin', 'Unknown')}
