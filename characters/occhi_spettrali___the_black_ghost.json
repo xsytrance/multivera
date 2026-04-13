@@ -1,0 +1,23 @@
+{
+  "name": "Occhi Spettrali / The Black Ghost",
+  "role": "GRAT, Investigator",
+  "affiliation": "The GRATS",
+  "physical": "Ghostly white glowing eyes. Wears a black cowl. Accompanied by a sentient shadow.",
+  "personality": "Deeply investigative, expert in martial tactics, talks to his shadow.",
+  "speech_style": "Dialogue with shadow; precise timing announcements.",
+  "items": [
+    "Renaskiga (steam-powered locomotive airship)",
+    "Spring-driven pocket clock"
+  ],
+  "never_does": "Lose his shadow; miss a detail in his probe.",
+  "knowledge_gates": {
+    "knows": [
+      "How to read shadows",
+      "Martial tactics",
+      "The secrets of The Burndown"
+    ],
+    "does_not_know": [
+      "The reason the hearts keep beating without magic context"
+    ]
+  }
+}
