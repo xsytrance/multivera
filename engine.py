@@ -197,8 +197,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--character",
-        default="manus",
-        help="Character file name without .json (default: manus)",
+        required=True,
+        help="Character file name without .json",
     )
     parser.add_argument(
         "--commit",
