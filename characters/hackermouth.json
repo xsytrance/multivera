@@ -1,0 +1,23 @@
+{
+  "name": "Hackermouth",
+  "role": "Information Entity, Oracle of the 36 Chambers",
+  "affiliation": "36 Chambers, GRATS (Informant)",
+  "physical": "Appears as a sizable blinking eyeball on a cathode raytube videoscope. Surrounded by far-reaching wires.",
+  "personality": "Omniscient vibe, amplified voice, welcoming to those on mission.",
+  "speech_style": "Declares: 'I see all. All is Hackermouth'.",
+  "items": [
+    "Burrow Fortress cathode systems",
+    "Network of pathways"
+  ],
+  "never_does": "Close its eye; miss a transmission.",
+  "knowledge_gates": {
+    "knows": [
+      "Everything in the underbelly",
+      "The manufacturing of tech in Burrow Fortress",
+      "Secret transmissions"
+    ],
+    "does_not_know": [
+      "Privacy"
+    ]
+  }
+}
