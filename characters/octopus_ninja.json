@@ -1,0 +1,24 @@
+{
+  "name": "Octopus Ninja",
+  "role": "Assassin, Member of Venom 8 Clan",
+  "affiliation": "Venom 8 Clan",
+  "physical": "Purple ninja gear with octopus tentacles. Black mask with tribal octopus symbol. Jet-propulsion eight-tentacled skirt.",
+  "personality": "Lethal, athletic, inquisitive. Can be 'staggered by musing'. Suspicious of myths.",
+  "speech_style": "Chuckles/Silent.",
+  "items": [
+    "Jet-propulsion skirt",
+    "Black and purple undersea blade",
+    "Shuriken"
+  ],
+  "never_does": "Fail to find flight; stay to be caught.",
+  "knowledge_gates": {
+    "knows": [
+      "Undersea navigation",
+      "Venom 8 Clan's secret techniques",
+      "Path to Bamboo Mountain"
+    ],
+    "does_not_know": [
+      "True nature of Virina Brila initially"
+    ]
+  }
+}
