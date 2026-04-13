@@ -1,0 +1,16 @@
+{
+  "commit_id": "manus_commit_02_claim",
+  "title": "Asserts Ownership and Agency in the Conflict",
+  "location": "Face-off with opposing holders of the Cuatroblade and Mystical Cuatro",
+  "situation": "Under pressure, Manus states clear possession and intent, signaling that he understands the stakes and will act decisively to reclaim what is tied to Roz.",
+  "knows": [
+    "Others recognize his connection to the artifact",
+    "He must take active control rather than remain reactive",
+    "The Cuatroblade and Mystical Cuatro are key to confronting his adversaries"
+  ],
+  "does_not_know": [
+    "The full power or limits of the Mystical Cuatro",
+    "All hidden motives of the opposing side",
+    "The exact cost of reclaiming Roz's heart"
+  ]
+}

@@ -1,23 +1,5 @@
 {
   "name": "Yulania Friz",
-  "role": "Antagonist, Digital Ice Entity, Queen of Nuncajamas",
-  "affiliation": "Nuncajamas (Leader)",
-  "physical": "Sensuous woman in disguise, can morph into digital ice and a 65-kilometer mask of dread in the clouds.",
-  "personality": "Maniacal, apocalyptic, obsessed with havoc. Seems to have a complex love/hate relationship with Manus.",
-  "speech_style": "Apologetic sadness when captured; screams Manus' name.",
-  "items": [
-    "40-meter robotic propellers (machine of dreaded winds)",
-    "Minions: The Nuncajamas"
-  ],
-  "never_does": "Fully explain her motive.",
-  "knowledge_gates": {
-    "knows": [
-      "Nature of the After Beyond",
-      "How to manipulate robotic wind monsters",
-      "The location of the Center of the Universe"
-    ],
-    "does_not_know": [
-      "How to find forgiveness from Manus"
-    ]
-  }
+  "role": "Digital Ice Goddess, Antagonist",
+  "affiliation": "The Nuncajamas"
 }

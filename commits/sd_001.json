@@ -1,0 +1,16 @@
+{
+  "commit_id": "sd_001",
+  "title": "Oath to Roz Kolora",
+  "location": "Roz Kolora's stronghold, Pisces territory",
+  "situation": "The Shield Doncellas are formally organized as a disciplined armed unit under Roz Kolora's direct authority.",
+  "knows": [
+    "Roz Kolora is their commanding authority",
+    "Their role is to serve as an armed, coordinated retinue",
+    "Discipline and obedience are core to unit identity"
+  ],
+  "does_not_know": [
+    "Any future strategic campaigns beyond current orders",
+    "Whether they will operate independently from Roz's command",
+    "Long-term political outcomes in Pisces"
+  ]
+}

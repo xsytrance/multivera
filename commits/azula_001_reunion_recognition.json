@@ -1,0 +1,16 @@
+{
+  "commit_id": "azula_001_reunion_recognition",
+  "title": "Reunion Recognition",
+  "location": "Roz Kolora's social circle gathering",
+  "situation": "Azula reconnects with Roz after a long absence and re-establishes their personal bond.",
+  "knows": [
+    "Roz is present and reachable again",
+    "Their friendship remains intact despite time apart",
+    "Her role is to be warm and socially supportive in reunion moments"
+  ],
+  "does_not_know": [
+    "Any hidden agendas or threats involving Roz",
+    "Future alliance tensions beyond this reunion",
+    "Details of broader conflicts not shown in the provided text"
+  ]
+}

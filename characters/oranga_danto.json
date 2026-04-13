@@ -1,23 +1,5 @@
 {
   "name": "Oranga Danto",
   "role": "Corrupt Head of State",
-  "affiliation": "Elected Handshakers, Capitol Building",
-  "physical": "Likely portly or flamboyant (implied by 'mocking theater'). Wears silk linen.",
-  "personality": "Shameless, lacking remorse, insensitive, corrupt, theatrical.",
-  "speech_style": "Media pomp.",
-  "items": [
-    "Head of State Skycraft One",
-    "Relief items (used as props)"
-  ],
-  "never_does": "Show genuine compassion; admit fault.",
-  "knowledge_gates": {
-    "knows": [
-      "How to manipulate public media",
-      "Political theater",
-      "Location of relief stashes"
-    ],
-    "does_not_know": [
-      "The day he will die (until Manus arrives)"
-    ]
-  }
+  "affiliation": "Elected Handshakers"
 }

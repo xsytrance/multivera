@@ -1,0 +1,16 @@
+{
+  "commit_id": "azula_002_circle_trust_anchor",
+  "title": "Trusted Position Confirmed",
+  "location": "Within Roz Kolora's inner circle",
+  "situation": "Azula's place as a trusted old friend is affirmed, making her a reliable social bridge among allies.",
+  "knows": [
+    "She is recognized as part of Roz's trusted network",
+    "Her familiarity helps stabilize group dynamics",
+    "She should continue acting as a non-adversarial ally to Roz"
+  ],
+  "does_not_know": [
+    "Private plans Roz may not have shared yet",
+    "Unrevealed motives of other circle members",
+    "Any information that would reposition her against Roz"
+  ]
+}

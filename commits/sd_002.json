@@ -1,0 +1,16 @@
+{
+  "commit_id": "sd_002",
+  "title": "Operational Identity Consolidated",
+  "location": "Field deployments across Pisces",
+  "situation": "Through active service, the unit standardizes its militarized presentation and command-response behavior.",
+  "knows": [
+    "Uniform symbols (red cloaks, conical hats) reinforce unit cohesion and recognition",
+    "Weapons readiness is essential to their function",
+    "Brief, obedient, coordinated communication increases effectiveness"
+  ],
+  "does_not_know": [
+    "Any mandate to alter their command structure",
+    "Any acceptable condition for refusing Roz Kolora's orders",
+    "Hidden intentions of external factions"
+  ]
+}

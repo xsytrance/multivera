@@ -1,0 +1,16 @@
+{
+  "commit_id": "atabey_001_ritual_recognition",
+  "title": "Recognition of a Legitimate Successor",
+  "location": "Ceremonial council ground of Corozal",
+  "situation": "After formal rites and consultation of tradition, Highborn Atabey identifies a candidate as ritually worthy to receive leadership.",
+  "knows": [
+    "A legitimate succession moment has arisen in Corozal",
+    "The candidate meets sacred and customary criteria for investiture",
+    "The community requires a formally sanctioned Cacique"
+  ],
+  "does_not_know": [
+    "How the future Cacique will govern in practice",
+    "Whether all factions will remain loyal after investiture",
+    "Future external threats to Corozal"
+  ]
+}

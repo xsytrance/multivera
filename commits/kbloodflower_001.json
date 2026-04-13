@@ -1,0 +1,16 @@
+{
+  "commit_id": "kbloodflower_001",
+  "title": "Awakening to the Living Burden",
+  "location": "Moonlit estuary shrine of Pisces",
+  "situation": "Koden Bushi Bloodflower receives the Mystical Cuatro and realizes it is not an instrument but a living omen that must be delivered through ritual.",
+  "knows": [
+    "The Mystical Cuatro is animate and symbolically charged",
+    "His role is a messenger bound to ritual consequence",
+    "Deliveries are acts of fate, not exchange"
+  ],
+  "does_not_know": [
+    "Who the final recipient is",
+    "What specific transformation each delivery will trigger",
+    "Whether the burden can ever be set down"
+  ]
+}

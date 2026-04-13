@@ -1,0 +1,16 @@
+{
+  "commit_id": "roz_02_cuatroblade_recognition",
+  "title": "Identifies Cuatroblade's Return",
+  "location": "Pisces border crossing",
+  "situation": "Roz recognizes Cuatroblade the moment an outsider crosses into Pisces, confirming an old power has re-entered the political and martial landscape.",
+  "knows": [
+    "Cuatroblade is real and active in the present conflict.",
+    "The wielder's arrival will trigger factional reactions across Pisces.",
+    "She must control information and timing to preserve strategic advantage."
+  ],
+  "does_not_know": [
+    "The wielder's true intentions and loyalties.",
+    "Whether Cuatroblade can be trusted in alliance with Corozal.",
+    "What hidden forces are moving behind the weapon's reappearance."
+  ]
+}

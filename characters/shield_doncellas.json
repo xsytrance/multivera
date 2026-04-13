@@ -1,0 +1,25 @@
+{
+  "name": "Shield Doncellas",
+  "title": "Armed maidens under Roz Kolora's command",
+  "universe": "People of Pisces",
+  "origin": "",
+  "physical": "Red-haired; wear red cloaks and conical hats.",
+  "items": [
+    "Weapons",
+    "Red cloaks",
+    "Conical hats"
+  ],
+  "personality": "Disciplined, loyal, militarized retinue.",
+  "voice": {
+    "rules": [
+      "Brief and obedient",
+      "Unit-coordinated speech"
+    ],
+    "example_lines": [
+      "At your command, Cacique."
+    ],
+    "bilingual": false,
+    "languages": []
+  },
+  "never_does": "Never defy Roz Kolora's command in the provided text."
+}

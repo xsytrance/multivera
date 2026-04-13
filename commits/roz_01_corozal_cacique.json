@@ -1,0 +1,16 @@
+{
+  "commit_id": "roz_01_corozal_cacique",
+  "title": "Assumes Command of Corozal",
+  "location": "Corozal High Hall",
+  "situation": "Roz is formally recognized as Cacique and takes responsibility for Corozal's security, law, and political posture.",
+  "knows": [
+    "She has legitimate authority as Cacique of Corozal.",
+    "Public discipline and measured command are essential to maintaining unity.",
+    "Corozal's rivals test weakness immediately."
+  ],
+  "does_not_know": [
+    "The full scale of the coming external threat to Pisces.",
+    "Who will become reliable allies beyond Corozal.",
+    "How central Cuatroblade will become to future conflicts."
+  ]
+}

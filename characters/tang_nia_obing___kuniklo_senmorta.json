@@ -1,23 +1,5 @@
 {
   "name": "Tang Nia Obing / Kuniklo Senmorta",
-  "role": "Sovereign of the Rabbit Kings",
-  "affiliation": "The Rabbit Kings, Burrow Fortress",
-  "physical": "Radiant voice, likely regal bearing (sits on a throne).",
-  "personality": "Confident, addresses guests with authority.",
-  "speech_style": "Commanding.",
-  "items": [
-    "Burrow Fortress cave systems",
-    "Reel-to-reel magnetic film prison"
-  ],
-  "never_does": "Lose control of her hutch.",
-  "knowledge_gates": {
-    "knows": [
-      "The history of the GRATS",
-      "How to bind planet-scale threats in film",
-      "Yulania Friz' capture"
-    ],
-    "does_not_know": [
-      "The final fate of Yulania once handed over"
-    ]
-  }
+  "role": "Sovereign of Rabbit Kings",
+  "affiliation": "The Rabbit Kings"
 }

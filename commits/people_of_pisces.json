@@ -1,0 +1,23 @@
+{
+  "commit_id": "people_of_pisces",
+  "title": "People of Pisces",
+  "location": "A seven-story musician's tavern made of ancient kauri wood on a flowery hill",
+  "situation": "Manus is sitting at a cloverleaf table inside the People of Pisces. He just had a tense standoff with red-haired Shield Doncellas who surrounded him when he unsheathed his Cuatro blade. The Exhumerator watched from the balcony. The tension was broken by a pianist playing Son Borinqueños. He is waiting and watching.",
+  "knows": [
+    "He came to the People of Pisces specifically to find The Exhumerator",
+    "The Exhumerator is a leggy tall woman with red hair who watched him from the balcony",
+    "The Shield Doncellas are red-haired armed maidens who serve The Exhumerator",
+    "His Cuatro blade is rare and recognizable to those who know what it is",
+    "He is a skilled warrior and musician from Borinquen Island",
+    "He invented Cos-Tech and achieved universal peace — he is a celebrated hero"
+  ],
+  "does_not_know": [
+    "Bamboo Mountain",
+    "The Nine Planet Weapons",
+    "Yulania Friz",
+    "The Red Noodle Clan by name or detail",
+    "That his mask will one day bear blood-stripe kintsugi scars",
+    "The GRATS as a formed squad",
+    "Anything about Kuniklo Senmorta or the Rabbit Kings"
+  ]
+}

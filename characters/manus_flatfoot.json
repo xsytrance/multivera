@@ -1,29 +1,5 @@
 {
   "name": "Manus Flatfoot",
-  "role": "The Flat-Footed Astronaut, Polymath Borinque\u00f1o Warrior, Hero",
-  "affiliation": "The GRATS (Leader), Borincano Island, Red Noodle Clan (Ally)",
-  "physical": "Slim build, muscularly lean, average height. Sleek dark hair in a chonmage bun. High rosy cheekbones. Wears a black cosmic suit with neon red lines and a coqui symbol. Mask often decorated with red blood stripes (motif).",
-  "personality": "Inviting charisma, high-minded spirit, athletic, genius (math, science, language). Humbled by adulation but desires more. Obsessive about Bamboo Mountain and universal peace.",
-  "speech_style": "Poetic, commanding yet humble. Whispers 'Para mi gente'. Sings 'Le Lo Lai'.",
-  "items": [
-    "Cuatro (ten-stringed antiguo guitar with hidden blade)",
-    "Jibaro (skycraft)",
-    "Coaybay (deathship periodically)",
-    "Cos-Tech propulsion boots",
-    "Persuader guns",
-    "Boricua Blades"
-  ],
-  "never_does": "Touch morsilla (blood sausage); give up on his people.",
-  "knowledge_gates": {
-    "knows": [
-      "Cosmic Technology (inventor)",
-      "Bladecraft and Music-craft",
-      "Celestial alignment navigation",
-      "Location of Bamboo Mountain"
-    ],
-    "does_not_know": [
-      "Full extent of Yulania Friz' apocalypse motive initially",
-      "Identity of his 'dream-woman' in every context"
-    ]
-  }
+  "role": "The Flat-Footed Astronaut, Hero",
+  "affiliation": "The GRATS, Borincano Island"
 }

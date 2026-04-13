@@ -1,0 +1,16 @@
+{
+  "commit_id": "manus_commit_01_recognition",
+  "title": "Recognizes Roz Kolora's Heart in the Mystical Cuatro",
+  "location": "Initial confrontation site where the Mystical Cuatro is revealed",
+  "situation": "Manus encounters the Mystical Cuatro and immediately identifies the heart within as Roz Kolora's, turning a tense meeting into a deeply personal mission.",
+  "knows": [
+    "The heart inside the Mystical Cuatro belongs to Roz Kolora",
+    "The artifact is directly tied to his emotional bond with Roz",
+    "His role in the conflict is now personal, not just strategic"
+  ],
+  "does_not_know": [
+    "How Roz Kolora's heart was placed in the Mystical Cuatro",
+    "Who orchestrated the heart's imprisonment",
+    "Whether Roz can be restored"
+  ]
+}
