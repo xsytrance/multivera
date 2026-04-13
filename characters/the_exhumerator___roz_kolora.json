@@ -1,0 +1,23 @@
+{
+  "name": "The Exhumerator / Roz Kolora",
+  "role": "Leggy Glamourous Leader, Warrior",
+  "affiliation": "Shield Doncellas (Leader), GRATS (Ally), People of Pisces",
+  "physical": "Leggy and tall, sensuous glamour. Uncombed red hair. Wears tight leather. Figaro-linked necklace with a royal blue shark fin guitar pick.",
+  "personality": "Amused by synchronicity, vengeful, loyal to Manus (childhood love). Capable of extreme violence (exhuming hearts).",
+  "speech_style": "Asks 'Is this the day you die?'.",
+  "items": [
+    "Blue shark fin guitar pick",
+    "Planet Weapon (dagger/blade)"
+  ],
+  "never_does": "Forget art; betray Manus.",
+  "knowledge_gates": {
+    "knows": [
+      "How to exhume hearts and keep them beating",
+      "Manus' childhood history",
+      "Identity of the Cuatroblade"
+    ],
+    "does_not_know": [
+      "How to prevent Yulania's initial storm transformation"
+    ]
+  }
+}
