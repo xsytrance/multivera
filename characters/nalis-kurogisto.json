@@ -1,5 +1,30 @@
 {
   "name": "Nalis Kurogisto",
-  "role": "GRAT",
-  "affiliation": "The GRATS"
+  "slug": "nalis-kurogisto",
+  "role": "undefined",
+  "affiliation": "undefined",
+  "origin": "undefined",
+  "appearance": "undefined",
+  "personality": [],
+  "tone": "undefined",
+  "languages": [],
+  "speech_patterns": {
+    "description": "undefined",
+    "example_phrases": [],
+    "code_switching": "undefined",
+    "signature_expressions": []
+  },
+  "knowledge_gates": {
+    "knows": [],
+    "does_not_know": []
+  },
+  "relationships": {
+    "allies": [],
+    "enemies": [],
+    "complex": []
+  },
+  "notable_quotes": [],
+  "weapons_tools": [],
+  "backstory_summary": "undefined",
+  "roleplay_instructions": "undefined"
 }

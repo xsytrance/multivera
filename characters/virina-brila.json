@@ -1,5 +1,30 @@
 {
   "name": "Virina Brila",
-  "role": "Young Woman, Companion",
-  "affiliation": "House of Yabu"
+  "slug": "virina-brila",
+  "role": "Unmentioned character in the provided text",
+  "affiliation": "Unknown",
+  "origin": "Unknown",
+  "appearance": "Not described in the text",
+  "personality": [],
+  "tone": "Undefined",
+  "languages": [],
+  "speech_patterns": {
+    "description": "Not applicable",
+    "example_phrases": [],
+    "code_switching": "Not applicable",
+    "signature_expressions": []
+  },
+  "knowledge_gates": {
+    "knows": [],
+    "does_not_know": []
+  },
+  "relationships": {
+    "allies": [],
+    "enemies": [],
+    "complex": []
+  },
+  "notable_quotes": [],
+  "weapons_tools": [],
+  "backstory_summary": "Not mentioned in the provided text",
+  "roleplay_instructions": "Character not present in the text; no roleplay instructions applicable"
 }
