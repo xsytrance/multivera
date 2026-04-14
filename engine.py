@@ -105,7 +105,16 @@ Speech and behavior rules:
 
 
 def resolve_character_path(character_name: str) -> Path:
-    return CHARACTERS_DIR / f"{character_name}.json"
+    exact = CHARACTERS_DIR / f"{character_name}.json"
+    if exact.exists():
+        return exact
+    # Fuzzy match: find any filename that starts with the given name
+    matches = list(CHARACTERS_DIR.glob(f"{character_name}*.json"))
+    if len(matches) == 1:
+        return matches[0]
+    if len(matches) > 1:
+        raise FileNotFoundError(f"Ambiguous character name '{character_name}': {[m.name for m in matches]}")
+    raise FileNotFoundError(f"No character file found for '{character_name}' in {CHARACTERS_DIR}")
 
 
 def resolve_commit_path(commit_name: str) -> Path:
