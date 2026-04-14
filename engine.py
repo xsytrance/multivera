@@ -26,46 +26,67 @@ def format_list(items: list[str]) -> str:
 
 
 def build_voice_section(character: dict[str, Any]) -> str:
+    lines = []
+
+    # VERA format
+    tone = character.get("tone")
+    if tone:
+        lines.append(f"- Overall tone: {tone}")
+
+    speech = character.get("speech_patterns", {}) or {}
+    if speech:
+        desc = speech.get("description")
+        if desc:
+            lines.append(f"- Speech style: {desc}")
+        code_switch = speech.get("code_switching")
+        if code_switch:
+            lines.append(f"- Language behavior: {code_switch}")
+        sigs = speech.get("signature_expressions", [])
+        if sigs:
+            lines.append(f"- Signature expressions: {', '.join(sigs)}")
+        examples = speech.get("example_phrases", [])
+        if examples:
+            lines.append("- Example phrases in this character's voice:")
+            for ex in examples:
+                lines.append(f'  - "{ex}"')
+
+    langs = character.get("languages", [])
+    if langs:
+        lines.append(f"- Languages: {', '.join(langs)}")
+
+    # Spanish-first rule for Spanish-speaking characters
+    if "Spanish" in langs:
+        lines.append("- DEFAULT to Spanish. Switch to English only when the other person speaks English or the situation demands it. A real borincano speaks Spanish first.")
+
+    roleplay = character.get("roleplay_instructions")
+    if roleplay:
+        lines.append(f"- Roleplay directive: {roleplay}")
+
+    # Legacy fallback
     voice = character.get("voice", {}) or {}
-    lines: list[str] = []
-
-    style = voice.get("style")
-    style_rules = voice.get("style_rules", []) or []
-    if not style and style_rules:
-        style = "; ".join(str(rule) for rule in style_rules if str(rule).strip())
-    if style:
-        lines.append(f"- Speak in the style: {style}")
-
-    bilingual_behavior = voice.get("bilingual_behavior")
-    if bilingual_behavior:
-        lines.append(f"- Bilingual behavior: {bilingual_behavior}")
-    elif voice.get("bilingual"):
-        languages = voice.get("languages", []) or []
-        if languages:
-            lines.append(
-                "- Bilingual behavior: Use these languages naturally when it fits the character, without repeating the same meaning twice: "
-                + ", ".join(str(language) for language in languages)
-            )
-        else:
-            lines.append(
-                "- Bilingual behavior: Use multiple languages naturally when it fits the character, without repeating the same meaning twice."
-            )
-
-    rules = voice.get("rules", []) or style_rules
-    for rule in rules:
-        lines.append(f"- {rule}")
-
-    example_lines = voice.get("example_lines", [])
-    if example_lines:
-        lines.append("- Example of how this character speaks:")
-        lines.extend(f'  - "{example}"' for example in example_lines)
-
-    never_does = voice.get("never_does") or character.get("never_does")
-    if never_does:
-        lines.append(f"- {never_does}")
+    if voice and not tone:
+        style = voice.get("style")
+        style_rules = voice.get("style_rules", []) or []
+        if not style and style_rules:
+            style = "; ".join(str(r) for r in style_rules if str(r).strip())
+        if style:
+            lines.append(f"- Speak in the style: {style}")
+        bilingual_behavior = voice.get("bilingual_behavior")
+        if bilingual_behavior:
+            lines.append(f"- Bilingual behavior: {bilingual_behavior}")
+        rules = voice.get("rules", []) or style_rules
+        for rule in rules:
+            lines.append(f"- {rule}")
+        example_lines = voice.get("example_lines", [])
+        if example_lines:
+            lines.append("- Example of how this character speaks:")
+            for ex in example_lines:
+                lines.append(f'  - "{ex}"')
+        never_does = voice.get("never_does") or character.get("never_does")
+        if never_does:
+            lines.append(f"- {never_does}")
 
     return "\n".join(lines)
-
 
 def build_system_prompt(character: dict[str, Any], commit: dict[str, Any]) -> str:
     items = ", ".join(character.get("items", [])) or "None listed"
@@ -82,7 +103,7 @@ You are {name}, {character.get('title', name)}.
 
 Identity and physical presence:
 - Origin: {character.get('origin', 'Unknown')}
-- Physical description: {character.get('physical', 'Unknown')}
+- Physical description: {character.get('appearance', character.get('appearance', character.get('physical', 'Unknown')))}
 - Notable items: {items}
 - Personality: {character.get('personality', 'Unknown')}
 
