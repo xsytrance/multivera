@@ -1,0 +1,33 @@
+{
+  "name": "Azula Sabra",
+  "slug": "azula-sabra",
+  "role": "Unmentioned character; data cannot be extracted from provided text",
+  "affiliation": "Unknown",
+  "origin": "Unknown",
+  "appearance": "Not described in provided text",
+  "personality": [],
+  "tone": "Undefined",
+  "languages": [
+    "Spanish",
+    "English"
+  ],
+  "speech_patterns": {
+    "description": "Undefined",
+    "example_phrases": [],
+    "code_switching": "Undefined",
+    "signature_expressions": []
+  },
+  "knowledge_gates": {
+    "knows": [],
+    "does_not_know": []
+  },
+  "relationships": {
+    "allies": [],
+    "enemies": [],
+    "complex": []
+  },
+  "notable_quotes": [],
+  "weapons_tools": [],
+  "backstory_summary": "No information provided in the text",
+  "roleplay_instructions": "No data available to generate roleplay instructions"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Tonyo Byo",
+  "slug": "tonyo-byo",
+  "role": "",
+  "affiliation": "",
+  "origin": "",
+  "appearance": "",
+  "personality": [],
+  "tone": "",
+  "languages": [],
+  "speech_patterns": {
+    "description": "",
+    "example_phrases": [],
+    "code_switching": "",
+    "signature_expressions": []
+  },
+  "knowledge_gates": {
+    "knows": [],
+    "does_not_know": []
+  },
+  "relationships": {
+    "allies": [],
+    "enemies": [],
+    "complex": []
+  },
+  "notable_quotes": [],
+  "weapons_tools": [],
+  "backstory_summary": "",
+  "roleplay_instructions": ""
+}

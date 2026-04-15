@@ -33,6 +33,7 @@ from engine import (
     load_character_and_commit,
 )
 from hackermouth_rag import COLLECTION_NAME, search_lore
+from storage import load_chat_history, save_chat_history
 
 sys.stdout.reconfigure(encoding="utf-8")
 logging.basicConfig(
@@ -47,7 +48,7 @@ if TYPE_CHECKING:
 DEFAULT_CHARACTER = "hackermouth"
 DEFAULT_COMMIT = "hackermouth_active"
 MAX_HISTORY_MESSAGES = 12
-LORE_RESULT_COUNT = 3
+LORE_RESULT_COUNT = 1
 
 
 def get_required_env(name: str) -> str:
@@ -55,14 +56,6 @@ def get_required_env(name: str) -> str:
     if not value:
         raise SystemExit(f"Missing required environment variable: {name}")
     return value
-
-
-def get_history(context: ContextTypes.DEFAULT_TYPE) -> list[dict[str, str]]:
-    history = context.chat_data.setdefault("history", [])
-    if isinstance(history, list):
-        return history
-    context.chat_data["history"] = []
-    return context.chat_data["history"]
 
 
 def trim_history(history: list[dict[str, str]]) -> None:
@@ -75,18 +68,13 @@ def build_lore_context(user_text: str) -> str | None:
     if not matches:
         return None
 
-    lines = [
-        "Relevant retrieved lore from the Hackermouth archive follows.",
-        "Use it when it helps answer faithfully. Do not mention retrieval, files, or hidden context.",
-    ]
-    for index, match in enumerate(matches, start=1):
-        metadata = match.get("metadata", {}) or {}
-        source_name = metadata.get("source_file", "unknown")
-        chunk_index = metadata.get("chunk_index", index)
-        lines.append(f"Lore chunk {index} ({source_name}, chunk {chunk_index}):")
-        lines.append(match.get("text", "").strip())
-
-    return "\n".join(line for line in lines if line.strip())
+    passage = (matches[0].get("text") or "").strip()
+    if not passage:
+        return None
+    return (
+        "Thin bleed-through from a deeper reel — rumor and static, not gospel:\n\n"
+        f"{passage}"
+    )
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -100,7 +88,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def reset(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.message is None:
         return
-    context.chat_data["history"] = []
+    chat_id = update.effective_chat.id
+    if chat_id is not None:
+        save_chat_history(chat_id, [])
     await update.message.reply_text("The tape hisses clean. The signal begins again.")
 
 
@@ -108,13 +98,17 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     if update.message is None or not update.message.text:
         return
 
-    history = get_history(context)
+    chat_id = update.effective_chat.id
+    if chat_id is None:
+        return
+
+    history = load_chat_history(chat_id)
     user_text = update.message.text.strip()
     if not user_text:
         return
 
     await context.bot.send_chat_action(
-        chat_id=update.effective_chat.id,
+        chat_id=chat_id,
         action=ChatAction.TYPING,
     )
 
@@ -138,7 +132,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     history.append({"role": "user", "content": user_text})
     history.append({"role": "assistant", "content": response_text})
     trim_history(history)
-    context.chat_data["history"] = history
+    save_chat_history(chat_id, history)
 
     await update.message.reply_text(response_text)
 

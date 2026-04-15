@@ -1,0 +1,30 @@
+{
+  "name": "Ma Boyas",
+  "slug": "ma-boyas",
+  "role": "unknown",
+  "affiliation": "unknown",
+  "origin": "unknown",
+  "appearance": "unknown",
+  "personality": [],
+  "tone": "unknown",
+  "languages": [],
+  "speech_patterns": {
+    "description": "unknown",
+    "example_phrases": [],
+    "code_switching": "unknown",
+    "signature_expressions": []
+  },
+  "knowledge_gates": {
+    "knows": [],
+    "does_not_know": []
+  },
+  "relationships": {
+    "allies": [],
+    "enemies": [],
+    "complex": []
+  },
+  "notable_quotes": [],
+  "weapons_tools": [],
+  "backstory_summary": "No information provided in the text.",
+  "roleplay_instructions": "No information provided in the text."
+}

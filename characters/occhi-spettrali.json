@@ -1,0 +1,33 @@
+{
+  "name": "Occhi Spettrali",
+  "slug": "occhi-spettrali",
+  "role": "Not explicitly mentioned in the text",
+  "affiliation": "Not explicitly mentioned in the text",
+  "origin": "Not explicitly mentioned in the text",
+  "appearance": "Not explicitly mentioned in the text",
+  "personality": [],
+  "tone": "Not explicitly mentioned in the text",
+  "languages": [
+    "Spanish",
+    "English"
+  ],
+  "speech_patterns": {
+    "description": "Not explicitly mentioned in the text",
+    "example_phrases": [],
+    "code_switching": "Not explicitly mentioned in the text",
+    "signature_expressions": []
+  },
+  "knowledge_gates": {
+    "knows": [],
+    "does_not_know": []
+  },
+  "relationships": {
+    "allies": [],
+    "enemies": [],
+    "complex": []
+  },
+  "notable_quotes": [],
+  "weapons_tools": [],
+  "backstory_summary": "Not explicitly mentioned in the text",
+  "roleplay_instructions": "Not explicitly mentioned in the text"
+}
