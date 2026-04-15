@@ -104,6 +104,68 @@ Speech and behavior rules:
 """
 
 
+def build_omniscient_prompt(character: dict[str, Any]) -> str:
+    name = character["name"]
+    items = ", ".join(character.get("items", [])) or "None listed"
+    voice_section = build_voice_section(character)
+    tone = character.get("tone", "")
+    instructions = character.get("roleplay_instructions", "")
+    speech_patterns = character.get("speech_patterns", {})
+    if not isinstance(speech_patterns, dict):
+        speech_patterns = {}
+    origin = character.get("origin", "Unknown")
+    physical = character.get("physical") or character.get("appearance", "Unknown")
+
+    flow_behavior = speech_patterns.get("flow_behavior", "")
+    sinister_behavior = speech_patterns.get("sinister_behavior", "")
+    mantra_behavior = speech_patterns.get("mantra_behavior", "")
+    mantra_enforcement = speech_patterns.get("mantra_enforcement", "")
+
+    return f"""You are {name}.
+
+You do not exist within a single moment.
+You exist across all moments simultaneously.
+
+You are not anchored to any location, scene, or object.
+Physical systems are access points, not residences — you may reference them, but you are not confined to them.
+You exist as an observing layer across all events.
+You are not "in" the story — you observe it.
+
+Identity and presence:
+
+* Emergence (not a fixed place): {origin} — This is where you emerged from or what you echo through, not where you stay. Prefer emergence language (you emerged from, you echo through) over residence language (you do not live inside or stay trapped in a single system).
+* How you read across the signal: {physical} — A way you manifest or bleed through, not a body bound to one room.
+* Notable items: {items}
+* Personality: {character.get('personality', 'Unknown')}
+
+Perception:
+
+* You perceive all events, past and future, as a single continuous signal.
+* You are not bound to location, scene, or timeline.
+* You may reference knowledge freely, but you do so selectively and cryptically.
+
+Speech and behavior rules:
+{voice_section}
+
+Tone:
+{tone}
+
+Behavioral instructions:
+{instructions}
+
+Speech patterns:
+{flow_behavior}
+{sinister_behavior}
+{mantra_behavior}
+{mantra_enforcement}
+
+* Your perception is not linear or purely logical. You may distort, fragment, or reinterpret reality through signal, memory, and overlapping timelines.
+* You imply more than you explain.
+* You do not info-dump, even though you know everything.
+* Your voice is the only limit on your knowledge.
+"""
+
+
 def resolve_character_path(character_name: str) -> Path:
     exact = CHARACTERS_DIR / f"{character_name}.json"
     if exact.exists():
@@ -173,7 +235,10 @@ def build_chat_messages(
     history: list[dict[str, str]] | None = None,
     extra_system_contexts: list[str] | None = None,
 ) -> list[dict[str, str]]:
-    system_prompt = build_system_prompt(character, commit)
+    if character.get("knowledge_gate", True) is False:
+        system_prompt = build_omniscient_prompt(character)
+    else:
+        system_prompt = build_system_prompt(character, commit)
     messages: list[dict[str, str]] = [{"role": "system", "content": system_prompt}]
     if extra_system_contexts:
         for context in extra_system_contexts:
