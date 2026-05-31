@@ -16,9 +16,9 @@ LOCATIONS_DIR = BASE_DIR / "locations"
 FACTIONS_DIR = BASE_DIR / "factions"
 WEAPONS_DIR = BASE_DIR / "weapons"
 
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://100.94.216.114:11434")
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://100.110.224.126:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:8b")
-DEFAULT_PROJECT_NAME = "Red Noodle Clan"
+DEFAULT_PROJECT_NAME = "Final Fantasy Tactics"
 
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 100

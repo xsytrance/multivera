@@ -4,7 +4,7 @@ Reads all existing JSON files from:
   characters/, commits/, locations/, factions/, weapons/
 
 Inserts them into SQLite via SQLAlchemy ORM.
-Creates a default Project called "Red Noodle Clan" that owns all existing data.
+Creates a default Project called "Final Fantasy Tactics" that owns all existing data.
 Preserves all relationships.
 """
 from __future__ import annotations
@@ -59,7 +59,7 @@ def create_default_project(db: Session) -> Project:
         logger.info("Default project already exists: id=%s", existing.id)
         return existing
 
-    project = Project(name=DEFAULT_PROJECT_NAME, description="A Poetic Saga of the Red Noodle Clan")
+    project = Project(name=DEFAULT_PROJECT_NAME, description="Final Fantasy Tactics — War of the Lions")
     db.add(project)
     db.commit()
     db.refresh(project)
