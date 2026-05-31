@@ -156,7 +156,125 @@ def delete_conversation(conversation_id: str, db: Session = Depends(get_db)) -> 
     return APIResponse(success=True, message=f"Conversation {conversation_id} deleted")
 
 
-# ── Health check for LLM backend ─────────────────────────────────────────────
+# ── OpenRouter Chat ───────────────────────────────────────────────────────────
+
+class OpenRouterBody(BaseModel):
+    conversation_id: str | None = None
+    project_id: int
+    character_ids: List[int]
+    commit_id: int | None = None
+    mode: str = "story-locked"
+    message: str
+    model: str = "meta-llama/llama-3.1-8b-instruct:free"
+    api_key: str
+
+
+@router.post("/chat/openrouter", response_model=ChatResponse)
+def chat_openrouter(
+    body: OpenRouterBody,
+    db: Session = Depends(get_db),
+) -> ChatResponse:
+    """Chat via OpenRouter API (supports Claude, GPT, Llama, etc.)."""
+    import httpx
+
+    # Validate project
+    project = db.query(Project).filter(Project.id == body.project_id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    # Validate characters
+    characters = db.query(Character).filter(Character.id.in_(body.character_ids)).all()
+    if not characters:
+        raise HTTPException(status_code=404, detail="No valid characters found")
+
+    # Build system prompt using the same engine as Ollama path
+    from backend.services.engine_service import build_system_prompt, create_conversation, build_chat_messages
+
+    primary_character = characters[0]
+    commit = None
+    if body.commit_id:
+        commit = db.query(Commit).filter(Commit.id == body.commit_id).first()
+
+    # Load or create conversation
+    if body.conversation_id:
+        conv = db.query(Conversation).filter(Conversation.id == body.conversation_id).first()
+        if not conv:
+            raise HTTPException(status_code=404, detail="Conversation not found")
+    else:
+        conv = create_conversation(
+            db=db,
+            project_id=body.project_id,
+            character_ids=body.character_ids,
+            commit_id=body.commit_id,
+            mode=body.mode,
+        )
+
+    # Build messages
+    history = conv.messages or []
+    plain_history = [{"role": m["role"], "content": m["content"]} for m in history]
+
+    messages = build_chat_messages(
+        character=primary_character,
+        commit=commit,
+        history=plain_history,
+        mode=body.mode,
+    )
+    messages.append({"role": "user", "content": body.message})
+
+    # Call OpenRouter
+    or_messages = []
+    for m in messages:
+        role = m["role"]
+        if role == "system":
+            role = "user"  # OpenRouter handles system via first user msg
+        or_messages.append({"role": role, "content": m["content"]})
+
+    try:
+        with httpx.Client(timeout=120) as client:
+            resp = client.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {body.api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": body.model,
+                    "messages": or_messages,
+                },
+            )
+        if resp.status_code != 200:
+            raise HTTPException(status_code=resp.status_code, detail=f"OpenRouter error: {resp.text}")
+        data = resp.json()
+        assistant_text = data["choices"][0]["message"]["content"].strip()
+    except httpx.TimeoutException:
+        raise HTTPException(status_code=504, detail="OpenRouter request timed out")
+    except Exception as exc:
+        logger.exception("OpenRouter chat failed")
+        raise HTTPException(status_code=502, detail=f"OpenRouter error: {exc}")
+
+    # Store messages
+    user_msg = {"role": "user", "content": body.message}
+    assistant_msg = {
+        "role": "assistant",
+        "content": assistant_text,
+        "character_id": primary_character.id,
+        "character_name": primary_character.name,
+    }
+    updated = list(history) + [user_msg, assistant_msg]
+    conv.messages = updated
+    db.commit()
+
+    return ChatResponse(
+        conversation_id=conv.id,
+        message=ConversationMessage(
+            role="assistant",
+            content=assistant_text,
+            character_id=primary_character.id,
+            character_name=primary_character.name,
+        ),
+        mode=body.mode,
+        knowledge_gate_active=body.mode in {"story-locked", "post-end", "multi-character"},
+    )
 
 @router.get("/chat/health")
 def chat_health() -> APIResponse:
