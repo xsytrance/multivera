@@ -292,3 +292,41 @@ def chat_health() -> APIResponse:
             message=f"LLM backend unreachable: {exc}",
             data={},
         )
+
+
+# ── Ollama Proxy (avoids CORS issues from browser) ───────────────────────────
+
+class OllamaProxyBody(BaseModel):
+    host: str = "http://100.110.224.126:11434"
+
+
+@router.post("/ollama/models")
+def ollama_models_proxy(body: OllamaProxyBody) -> APIResponse:
+    """Proxy to list Ollama models (avoids browser CORS)."""
+    import httpx
+    try:
+        with httpx.Client(timeout=10) as client:
+            resp = client.get(f"{body.host}/api/tags")
+        if resp.status_code != 200:
+            return APIResponse(success=False, message=f"Ollama returned {resp.status_code}", data={})
+        data = resp.json()
+        models = [m["name"] for m in data.get("models", [])]
+        return APIResponse(success=True, message=f"Found {len(models)} models", data={"models": models})
+    except Exception as exc:
+        return APIResponse(success=False, message=str(exc), data={})
+
+
+@router.post("/ollama/test")
+def ollama_test_proxy(body: OllamaProxyBody) -> APIResponse:
+    """Proxy to test Ollama connection (avoids browser CORS)."""
+    import httpx
+    try:
+        with httpx.Client(timeout=10) as client:
+            resp = client.get(f"{body.host}/api/tags")
+        if resp.status_code == 200:
+            data = resp.json()
+            models = [m["name"] for m in data.get("models", [])]
+            return APIResponse(success=True, message=f"Connected — {len(models)} models available", data={"models": models})
+        return APIResponse(success=False, message=f"Ollama returned {resp.status_code}", data={})
+    except Exception as exc:
+        return APIResponse(success=False, message=str(exc), data={})
