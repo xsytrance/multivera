@@ -344,6 +344,69 @@ def build_chat_messages(
     return messages
 
 
+def build_save_context(project: Optional[Any]) -> Optional[str]:
+    """Build a save file context string from project's stored save data.
+
+    Returns a formatted string with party stats, story progress, etc.
+    for injection into the system prompt.
+    """
+    if project is None:
+        return None
+    save_data = getattr(project, 'save_data', None)
+    if not save_data:
+        return None
+
+    lines = ["### SAVE FILE DATA (from loaded FFT save)"]
+
+    # Story progress
+    sp = save_data.get('story_progress', {})
+    if sp:
+        phase = sp.get('phase', 'unknown')
+        chapter = sp.get('chapter', '?')
+        scene = sp.get('scene', '?')
+        checkpoint = sp.get('checkpoint', 0)
+        battle_state = sp.get('battle_state', 0)
+        lines.append(f"- Story phase: {phase}")
+        lines.append(f"- Chapter: {chapter}, Scene: {scene}")
+        lines.append(f"- Checkpoint: {checkpoint}")
+        if battle_state:
+            lines.append(f"- Battle state: {battle_state}")
+
+    # Party context
+    pc = save_data.get('party_context', {})
+    if pc:
+        party = pc.get('full_party_estimate', [])
+        if party:
+            lines.append(f"- Current party: {', '.join(party)}")
+        always = pc.get('always_present', [])
+        if always:
+            lines.append(f"- Always present: {', '.join(always)}")
+        likely = pc.get('likely_present', [])
+        if likely:
+            lines.append(f"- Likely present: {', '.join(likely)}")
+
+    # Player characters with stats
+    player_chars = save_data.get('player_characters', [])
+    if player_chars:
+        lines.append("- Party member stats from save:")
+        for ch in player_chars:
+            if isinstance(ch, dict):
+                name = ch.get('name', 'Unknown')
+                stats = ch.get('stats', {})
+                hp = stats.get('hp', ch.get('hp', '?'))
+                mp = stats.get('mp', ch.get('mp', '?'))
+                pa = stats.get('pa_or_speed', '?')
+                vit = stats.get('vit_or_hpgrowth', '?')
+                exp = stats.get('exp_or_gil', '?')
+                enc = ch.get('encoding', '')
+                parts = [f"  - {name}: HP={hp}, MP={mp}, PA/Spd={pa}, VIT={vit}, EXP/Gil={exp}"]
+                if enc:
+                    parts.append(f" [{enc}]")
+                lines.append(''.join(parts))
+
+    return '\n'.join(lines) if len(lines) > 1 else None
+
+
 def stream_chat_turn(
     db: Session,
     request: ChatRequest,
@@ -398,7 +461,18 @@ def stream_chat_turn(
             .all()
         )
 
+    # Load save context from project
+    save_context = None
+    try:
+        from backend.models import Project
+        project = db.query(Project).filter(Project.id == request.project_id).first()
+        save_context = build_save_context(project)
+    except Exception as exc:
+        logger.warning("Failed to load save context: %s", exc)
+
     extra_system_contexts: List[str] = []
+    if save_context:
+        extra_system_contexts.append(save_context)
     if lore_context:
         extra_system_contexts.append(lore_context)
     elif request.mode not in {"agent", "casual"}:
@@ -530,8 +604,19 @@ def run_chat_turn(
             .all()
         )
 
+    # Load save context from project
+    save_context = None
+    try:
+        from backend.models import Project
+        project = db.query(Project).filter(Project.id == request.project_id).first()
+        save_context = build_save_context(project)
+    except Exception as exc:
+        logger.warning("Failed to load save context: %s", exc)
+
     # RAG lore context
     extra_system_contexts: List[str] = []
+    if save_context:
+        extra_system_contexts.append(save_context)
     if lore_context:
         extra_system_contexts.append(lore_context)
     elif request.mode not in {"agent", "casual"}:
