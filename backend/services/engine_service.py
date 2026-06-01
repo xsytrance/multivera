@@ -470,7 +470,7 @@ def stream_chat_turn(
     conv.messages = updated
     db.commit()
 
-    yield f"data: {json.dumps({'type': 'done'})}\\n\\n"
+    yield f"data: {json.dumps({'type': 'done'})}\n\n"
 
 
 def run_chat_turn(
