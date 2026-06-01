@@ -344,6 +344,135 @@ def build_chat_messages(
     return messages
 
 
+def stream_chat_turn(
+    db: Session,
+    request: ChatRequest,
+    client: Any,
+    model: str,
+    lore_context: Optional[str] = None,
+):
+    """Execute one chat turn with streaming — yields SSE data strings."""
+    # Load or create conversation (same as run_chat_turn)
+    if request.conversation_id:
+        conv = db.query(Conversation).filter(Conversation.id == request.conversation_id).first()
+        if not conv:
+            raise ValueError(f"Conversation {request.conversation_id} not found")
+    else:
+        conv = create_conversation(
+            db=db,
+            project_id=request.project_id,
+            character_ids=request.character_ids,
+            commit_id=request.commit_id,
+            mode=request.mode,
+        )
+
+    # Load characters
+    characters = db.query(Character).filter(Character.id.in_(request.character_ids)).all()
+    if not characters:
+        raise ValueError("No characters found")
+
+    primary_character = characters[0]
+    commit = None
+    if request.commit_id:
+        commit = db.query(Commit).filter(Commit.id == request.commit_id).first()
+
+    # Build messages (same as run_chat_turn)
+    other_characters = None
+    if request.mode == "multi-character" and len(characters) > 1:
+        other_characters = []
+        for char in characters[1:]:
+            char_commit = None
+            if request.commit_id:
+                char_commit = db.query(Commit).filter(
+                    Commit.character_id == char.id,
+                    Commit.id == request.commit_id,
+                ).first()
+            other_characters.append((char, char_commit))
+
+    all_commits = None
+    if request.mode == "post-end":
+        all_commits = (
+            db.query(Commit)
+            .filter(Commit.character_id == primary_character.id)
+            .order_by(Commit.order_index)
+            .all()
+        )
+
+    extra_system_contexts: List[str] = []
+    if lore_context:
+        extra_system_contexts.append(lore_context)
+    elif request.mode not in {"agent", "casual"}:
+        try:
+            from backend.services.rag_service import search_lore
+            matches = search_lore(
+                request.message,
+                project_id=request.project_id,
+                n_results=3,
+            )
+            if matches:
+                lines = [
+                    "Relevant retrieved lore follows.",
+                    "Use it when it helps answer faithfully. Do not mention retrieval, files, or hidden context.",
+                ]
+                for idx, match in enumerate(matches, start=1):
+                    meta = match.get("metadata", {})
+                    source = meta.get("source_file", "unknown")
+                    lines.append(f"Lore chunk {idx} ({source}):")
+                    lines.append(match.get("text", "").strip())
+                extra_system_contexts.append("\n".join(lines))
+        except Exception as exc:
+            logger.warning("Lore retrieval failed: %s", exc)
+
+    history = conv.messages or []
+    plain_history = [{"role": m["role"], "content": m["content"]} for m in history]
+
+    messages = build_chat_messages(
+        character=primary_character,
+        commit=commit,
+        history=plain_history,
+        mode=request.mode,
+        extra_system_contexts=extra_system_contexts or None,
+        all_commits=all_commits,
+        other_characters=other_characters,
+    )
+    messages.append({"role": "user", "content": request.message})
+
+    # Emit conversation_id as first SSE event
+    yield f"data: {json.dumps({'type': 'meta', 'conversation_id': conv.id, 'character_id': primary_character.id, 'character_name': primary_character.name, 'mode': request.mode})}\n\n"
+
+    # Stream from Ollama
+    full_text = ""
+    try:
+        stream_resp = client.chat(model=model, messages=messages, stream=True)
+        for chunk in stream_resp:
+            # Ollama returns ChatResponse objects, not dicts
+            msg = chunk.get("message") if isinstance(chunk, dict) else getattr(chunk, "message", None)
+            if msg is None:
+                continue
+            delta = msg.get("content", "") if isinstance(msg, dict) else getattr(msg, "content", "") or ""
+            if delta:
+                full_text += delta
+                yield f"data: {json.dumps({'type': 'token', 'content': delta})}\n\n"
+    except Exception as exc:
+        logger.exception("Streaming chat failed")
+        yield f"data: {json.dumps({'type': 'error', 'content': str(exc)})}\n\n"
+        return
+
+    # Store messages in DB
+    user_msg = {"role": "user", "content": request.message}
+    assistant_msg = {
+        "role": "assistant",
+        "content": full_text,
+        "character_id": primary_character.id,
+        "character_name": primary_character.name,
+    }
+    updated = list(history) + [user_msg, assistant_msg]
+    conv.messages = updated
+    db.commit()
+
+    yield f"data: {json.dumps({'type': 'done'})}\\n\\n"
+
+
 def run_chat_turn(
     db: Session,
     request: ChatRequest,
